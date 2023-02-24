@@ -1,0 +1,16 @@
+# CMake generation dependency list for this directory.
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/src/zlib-1.2.5/CMakeLists.txt
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckTypeSize.cmake
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckIncludeFile.cmake
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckIncludeFileCXX.cmake
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckFunctionExists.cmake
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckIncludeFile.cmake
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckCSourceCompiles.cmake
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckIncludeFile.c.in
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckIncludeFile.c.in
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckIncludeFile.c.in
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckTypeSize.c.in
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/_build/CMakeFiles/CheckTypeSize/OFF64_T.c
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckFunctionExists.c
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/cmake/share/cmake-3.3/Modules/CheckIncludeFile.c.in
+E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/src/zlib-1.2.5/zconf.h.cmakein

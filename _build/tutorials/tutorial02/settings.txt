@@ -1,0 +1,11 @@
+hardness_mode~3
+field_height~12
+field_width~10
+brick_path~white_cube.png
+square_path~white_cube.png
+brick_tex_start_x~0.0
+brick_tex_start_y~0.0
+brick_tex_fraction~0.5
+square_tex_start_x~0.0
+square_tex_start_y~0.0
+square_tex_fraction~0.5

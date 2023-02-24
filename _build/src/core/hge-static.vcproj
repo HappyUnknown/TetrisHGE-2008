@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding = "UTF-8"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="hge-static"
+	ProjectGUID="{45080341-EE15-4AED-84DD-951D441D5A92}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\linklib\Debug"
+			IntermediateDirectory="hge-static.dir\Debug"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /MP"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				AssemblerListingLocation="Debug/"
+				BasicRuntimeChecks="3"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="0"
+				Optimization="0"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="true"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;HGE_DIRECTX_VER=9;HGE_UNICODE=;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;CMAKE_INTDIR=\&quot;Debug\&quot;"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;HGE_DIRECTX_VER=9;HGE_UNICODE=;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;CMAKE_INTDIR=\&quot;Debug\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				MkTypLibCompatible="false"
+				TargetEnvironment="1"
+				GenerateStublessProxies="true"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\linklib\Debug\hge-static.lib"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\linklib\Release"
+			IntermediateDirectory="hge-static.dir\Release"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /MP"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				AssemblerListingLocation="Release/"
+				CompileAs="2"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="2"
+				Optimization="2"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="true"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HGE_DIRECTX_VER=9;HGE_UNICODE=;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;CMAKE_INTDIR=\&quot;Release\&quot;"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HGE_DIRECTX_VER=9;HGE_UNICODE=;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;CMAKE_INTDIR=\&quot;Release\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				MkTypLibCompatible="false"
+				TargetEnvironment="1"
+				GenerateStublessProxies="true"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\linklib\Release\hge-static.lib"/>
+		</Configuration>
+		<Configuration
+			Name="MinSizeRel|Win32"
+			OutputDirectory="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\linklib\MinSizeRel"
+			IntermediateDirectory="hge-static.dir\MinSizeRel"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /MP"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				AssemblerListingLocation="MinSizeRel/"
+				CompileAs="2"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="1"
+				Optimization="1"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="true"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HGE_DIRECTX_VER=9;HGE_UNICODE=;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HGE_DIRECTX_VER=9;HGE_UNICODE=;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				MkTypLibCompatible="false"
+				TargetEnvironment="1"
+				GenerateStublessProxies="true"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\linklib\MinSizeRel\hge-static.lib"/>
+		</Configuration>
+		<Configuration
+			Name="RelWithDebInfo|Win32"
+			OutputDirectory="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\linklib\RelWithDebInfo"
+			IntermediateDirectory="hge-static.dir\RelWithDebInfo"
+			ConfigurationType="4"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="false"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /MP"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				AssemblerListingLocation="RelWithDebInfo/"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="1"
+				Optimization="2"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="true"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HGE_DIRECTX_VER=9;HGE_UNICODE=;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;HGE_DIRECTX_VER=9;HGE_UNICODE=;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0501;CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				AdditionalIncludeDirectories="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\libPNG&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\zlib-1.2.5\contrib\minizip&quot;;&quot;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\include&quot;;"
+				MkTypLibCompatible="false"
+				TargetEnvironment="1"
+				GenerateStublessProxies="true"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\linklib\RelWithDebInfo\hge-static.lib"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/src/core/CMakeLists.txt"
+					CommandLine="..\..\..\cmake\bin\cmake.exe &quot;-HE:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting&quot; &quot;-BE:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/_build&quot; --check-stamp-file &quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core\CMakeFiles\generate.stamp&quot;&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt&quot;;"
+					Outputs="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/src/core/CMakeLists.txt"
+					CommandLine="..\..\..\cmake\bin\cmake.exe &quot;-HE:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting&quot; &quot;-BE:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/_build&quot; --check-stamp-file &quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core\CMakeFiles\generate.stamp&quot;&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt&quot;;"
+					Outputs="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/src/core/CMakeLists.txt"
+					CommandLine="..\..\..\cmake\bin\cmake.exe &quot;-HE:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting&quot; &quot;-BE:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/_build&quot; --check-stamp-file &quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core\CMakeFiles\generate.stamp&quot;&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt&quot;;"
+					Outputs="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule E:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/src/core/CMakeLists.txt"
+					CommandLine="..\..\..\cmake\bin\cmake.exe &quot;-HE:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting&quot; &quot;-BE:/FILES/WORK/IOneGames/Tetris/Ye-e-e oldschool/hge-porting/_build&quot; --check-stamp-file &quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core\CMakeFiles\generate.stamp&quot;&#x0D;&#x0A;if errorlevel 1 goto :VCReportError"
+					AdditionalDependencies="&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt&quot;;&quot;E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\CMakeLists.txt&quot;;"
+					Outputs="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\_build\src\core\CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+			</File>
+		<Filter
+			Name="Source Files"
+			Filter="">
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\demo.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\graphics.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\ini.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\input.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\power.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\random.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\resource.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\sound.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\system.cpp">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\timer.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="">
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\hge_impl.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\src\core\BASS\bass.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hge.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgeanim.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgecolor.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgedistort.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgefont.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgegui.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgeguictrls.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgeparticle.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgerect.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgeresource.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgesprite.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgestrings.h">
+			</File>
+			<File
+				RelativePath="E:\FILES\WORK\IOneGames\Tetris\Ye-e-e oldschool\hge-porting\include\hgevector.h">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
