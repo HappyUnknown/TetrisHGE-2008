@@ -1,70 +1,6 @@
 #include "Tetris.h"
 
-void Tetris::setup_boom()
-{
-	boomEffect = hge->Effect_Load("menu.wav");
-}
-void Tetris::play_place()
-{	
-  const float volume = 100;
-  const float pan = int((-1) / 2.56f);
-  const float pitch = 0.15;
-  hge->Effect_PlayEx(boomEffect, volume, pan, pitch);
-}
-void Tetris::play_pop()
-{
-  const float volume = 100;
-  const float pan = int((-1) / 2.56f);
-  const float pitch = 0.5;
-  hge->Effect_PlayEx(boomEffect, volume, pan, pitch);
-}
 
-void Tetris::setup_backmusic(std::string path)
-{
-	backmusic = hge->Stream_Load(path.c_str());
-}
-void Tetris::play_backmusic()
-{
-	hge->Stream_Play(backmusic, true);
-}
-void Tetris::stop_backmusic()
-{
-	hge->Stream_Free(backmusic);
-}
-std::string Tetris::guarantee_get_playlist_path()
-{
-	if(!DealFiles::file_exists(GameConstants::get_playlist_path())) DealFiles::recreate_file(GameConstants::get_playlist_path());
-	return GameConstants::get_playlist_path();
-}
-std::vector<std::string>Tetris::read_playlist()
-{
-	return DealFiles::read_lines(guarantee_get_playlist_path());
-}
-std::string Tetris::playlist_get_random_path()
-{
-	srand(time(NULL));
-	std::vector<std::string> playlist = read_playlist();
-	if(playlist.size() > 0)
-	{
-		int randomIndex = rand() % playlist.size();
-		if(playlist[randomIndex] != "")
-		{
-			std::string path = playlist[randomIndex];
-			if(DealFiles::file_exists(path))
-			return path;
-			else popup(path+"\nPath does not exist");
-		}
-		else popup("Playlist's element is an empty line");
-	}
-	else popup("Playlist is empty");
-	return "menu.wav";
-}
-void Tetris::play_random_music()
-{
-	std::string path = playlist_get_random_path();
-	setup_backmusic(path);
-	play_backmusic();
-}
 	void Tetris::init_score_font()
 	{
 		scorefont=new hgeFont("font1.fnt");
@@ -103,8 +39,8 @@ void Tetris::play_random_music()
 		}
 		void Tetris::enter_game(bool resume)
 		{
-			setup_boom();
-			play_random_music();
+			player.setup_boom(hge);
+			player.play_random_music(hge);
 
 			fieldHeight = read_correct_field_height();
 			fieldWidth = read_correct_field_width();
@@ -124,7 +60,7 @@ void Tetris::play_random_music()
 
 			init_wall(TetrominoColors::get_color_by_id(TetrominoColors::Colors::Yellow));
 			imagine_wall();
-			play_backmusic();
+			player.play_backmusic(hge);
 			
 			figures.clear();
 			if(resume)
@@ -280,7 +216,7 @@ void Tetris::play_random_music()
 		bool Tetris::menu_setup(HGE*hge, bool animate)
 		{
 			// Offload music, in case you are finishing
-			stop_backmusic();
+			player.stop_backmusic(hge);
 			// Load sound and textures
 			menuBackIMG.tex=hge->Texture_Load(GameConstants::get_background_path().c_str());
 			menuCRSTex=hge->Texture_Load("cursor.png");
@@ -370,7 +306,7 @@ void Tetris::play_random_music()
 			hge->Texture_Free(menuCRSTex);
 			hge->Texture_Free(menuBackIMG.tex);
 		}
-		Tetris::Tetris()
+	Tetris::Tetris()
 	{
 		hge = 0;
 		fieldWidth = GameConstants::DEFAULT_FIELD_WIDTH;
@@ -422,13 +358,13 @@ void Tetris::play_random_music()
 		if(!current_collides_upside() && this->all_in_box(current_tetromino()->preview_up()))
 			current_tetromino()->move_up();
 	}
-	void Tetris::current_down()
+	void Tetris::current_down(int step)
 	{
 		//std::vector<TetrominoBase*> movings = get_moving_figures();
 		//for(int i=0;i<movings.size();i++)
 		//	movings[i]->move_down();
-		if(!current_collides_downside() && this->all_in_box(current_tetromino()->preview_down()))
-			current_tetromino()->move_down();
+		if(!current_collides_downside(step) && this->all_in_box(current_tetromino()->preview_down(step)))
+			current_tetromino()->move_down(step);
 	}
 	void Tetris::current_clockwise()
 	{
@@ -562,15 +498,18 @@ void Tetris::play_random_music()
 			current_up();
 		if (hge->Input_KeyDown(HGEK_DOWN) || bell_rings_on_tick())
 		{
+			int step = 1;
 			reset_timer();
-			bool downgoInBox = all_in_box(current_tetromino()->preview_down());
-			bool canMoveDown = !current_collides_downside();
+			bool downgoInBox = all_in_box(current_tetromino()->preview_down(step));
+			bool canMoveDown = !current_collides_downside(step);
 			if(canMoveDown && downgoInBox)
-				current_down();
+				current_down(step);
 			else
 				//no need to create new random examplar - random examplar creation is an automatic process
 				place_all();
 		}
+		if (hge->Input_KeyDown(HGEK_SPACE))
+			current_tetromino()->move_down(current_min_projection_delta());
 		if (hge->Input_KeyDown(HGEK_TAB))
 			current_clockwise();
 		if (hge->Input_KeyDown(HGEK_SHIFT))
@@ -667,7 +606,7 @@ void Tetris::play_random_music()
 	{
 		for(int i=0;i<figures.size();i++)
 			figures[i]->place();
-		play_place();
+		player.play_place(hge);
 	}
 	bool Tetris::all_landed()
 	{
@@ -676,10 +615,10 @@ void Tetris::play_random_music()
 				return false;
 		return true;
 	}
-	bool Tetris::current_collides_downside()
+	bool Tetris::current_collides_downside(int step)
 	{
 		for(int i=0;i<figures.size();i++)
-			if(figures[i]->intersects_any(current_tetromino()->preview_down()) && current_tetromino() != figures[i])
+			if(figures[i]->intersects_any(current_tetromino()->preview_down(step)) && current_tetromino() != figures[i])
 				return true;
 		return false;
 	}
@@ -808,7 +747,7 @@ void Tetris::play_random_music()
 		{
 			clear_row(iVal);
 			fall_above_row(iVal);
-			play_pop();
+			player.play_pop(hge);
 		}
 	}
 	void Tetris::clear_all_rows_full()
@@ -830,4 +769,37 @@ void Tetris::play_random_music()
 		if(loopTime >= loopMaxTime)
 			return true;
 		return false;
+	}
+	int Tetris::projection_delta(Position currentPos)
+	{
+		int minDeltaI = fieldHeight;
+		for(int fi = 0; fi < figures.size(); fi++)
+			for(int fj = 0; fj < figures[fi]->squares.size();fj++)
+			{
+				Position placedPos = figures[fi]->squares[fj].pos;
+				if(!current_tetromino()->takes_position(placedPos))//if figure square considered is not related to current
+					if(placedPos.j == currentPos.j)
+					{
+						int thisDeltaI = (placedPos - currentPos).i;
+						if(minDeltaI > thisDeltaI)
+							minDeltaI = thisDeltaI;
+					}
+			}
+		if(minDeltaI == fieldHeight) //if none of the figures is lower than current (except current) - get lowest figure position, and fall
+		{
+			minDeltaI -= current_tetromino()->max_i();
+		}
+		return minDeltaI;
+	}
+	int Tetris::current_min_projection_delta()
+	{
+		TetrominoBase*current = current_tetromino();
+		int minDeltaI = INT_MAX;
+		for(int i = 0; i < current->squares.size(); i++)
+		{
+			int currentDelta = projection_delta(current->squares[i].pos) - 1;
+			if(minDeltaI > currentDelta)
+				minDeltaI = currentDelta;
+		}
+		return minDeltaI;
 	}

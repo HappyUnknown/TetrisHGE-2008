@@ -62,3 +62,8 @@ Position::Position()
 	//			return true;
 	//	return false;
 	//}
+
+	Position Position::operator-(Position right)
+	{
+		return Position(this->i-right.i, this->j-right.j);
+	}

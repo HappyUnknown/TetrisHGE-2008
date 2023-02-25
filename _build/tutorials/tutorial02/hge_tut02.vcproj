@@ -480,6 +480,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TetrisAudio.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TetrisMath.h"
 				>
 			</File>
@@ -541,6 +545,10 @@
 			</File>
 			<File
 				RelativePath=".\Tetris.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\TetrisAudio.cpp"
 				>
 			</File>
 			<File

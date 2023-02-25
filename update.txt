@@ -1,0 +1,5 @@
+TetrominoBase::takes_position() => Function, knowing if tetromino occupies position signed
+TetrominoBase::warp_down() => Function responsible for moving distance given
+Position::operator-() => Operator, helping us know delta between positions, to know how many cells need to pass untill bottom
+Tetris::projection_delta => returns number of cells we need to move to reach blocks below
+Tetris::current_projection_delta() => checks all current blocks on the lowest vertical delta 

@@ -12,7 +12,7 @@ struct GameSquare
 	void rotate_clockwise(Position center);
 	void rotate_counterclockwise(Position center);
 	void move_up();
-	void move_down();
+	void move_down(int step);
 	void move_left();
 	void move_right();
 	void land();

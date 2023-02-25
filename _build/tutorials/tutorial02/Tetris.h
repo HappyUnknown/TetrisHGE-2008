@@ -1,22 +1,7 @@
-#include "MenuOptions.h"
+#include "TetrisAudio.h"
 struct Tetris
 {	
-	#pragma region SOUND
-	HEFFECT boomEffect;
-	void Tetris::setup_boom();
-	void Tetris::play_place();
-	void Tetris::play_pop();
-	#pragma endregion
-	#pragma region STREAMS
-	HSTREAM backmusic;
-	void setup_backmusic(std::string path);
-	void play_backmusic();
-	void stop_backmusic();
-	std::string guarantee_get_playlist_path();
-	std::vector<std::string> read_playlist();
-	std::string playlist_get_random_path();
-	void play_random_music();
-	#pragma endregion
+	TetrisAudio player;
 	#pragma region SCORE DISPLAY
 	int score;
 	hgeFont	*scorefont;
@@ -66,7 +51,7 @@ struct Tetris
 	void current_left();
 	void current_right();
 	void current_up();
-	void current_down();
+	void current_down(int step);
 	void current_clockwise();
 	void current_counterclockwise();
 	int squares_on_width();
@@ -93,7 +78,7 @@ struct Tetris
 	void dispose_textures();
 	void place_all();
 	bool all_landed();
-	bool current_collides_downside();
+	bool current_collides_downside(int step);
 	bool current_collides_upside();
 	bool current_collides_leftside();
 	bool current_collides_rightside();
@@ -114,5 +99,7 @@ struct Tetris
 	void clear_all_rows_full();
 	void timer_tick();
 	void reset_timer();
+	int projection_delta(Position currentPos);
+	int current_min_projection_delta();
 	bool bell_rings_on_tick();
 };

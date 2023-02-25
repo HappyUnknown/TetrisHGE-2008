@@ -10,7 +10,7 @@ struct TetrominoBase
 	void rotate_clockwise();
 	void rotate_counterclockwise();
 	void move_up();
-	void move_down();
+	void move_down(int step);
 	void move_left();
 	void move_right();
 	void place();
@@ -27,7 +27,7 @@ struct TetrominoBase
 	bool is_leftside(std::vector<GameSquare>squares);
 	bool is_rightside(TetrominoBase*tetromino);
 	bool is_rightside(std::vector<GameSquare>squares);
-	std::vector<GameSquare> preview_down();
+	std::vector<GameSquare> preview_down(int step);
 	std::vector<GameSquare> preview_up();
 	std::vector<GameSquare> preview_left();
 	std::vector<GameSquare> preview_right();
@@ -36,5 +36,8 @@ struct TetrominoBase
 	int clear_row(int iVal);
 	int count_row_squares(int iVal);
 	void fall_above_row(int iVal);
+	bool TetrominoBase::takes_position(Position pos);
+	//j parameter overload is not being used in code, but can be used when we need to define currents's maximum on column
+	int TetrominoBase::max_i(int j = -1);
 	virtual void detect_center() = 0;
 };

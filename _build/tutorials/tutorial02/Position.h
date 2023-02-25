@@ -14,11 +14,5 @@ struct Position
 	bool Position::is_under(Position pos);
 	bool Position::is_leftside(Position pos);
 	bool Position::is_rightside(Position pos);
-	//bool intersects_any(std::vector<Position>crowd)
-	//{
-	//	for(int i=0;i<crowd.size();i++)
-	//		if(this->intersects(crowd[i]))
-	//			return true;
-	//	return false;
-	//}
+	Position operator-(Position right);
 };

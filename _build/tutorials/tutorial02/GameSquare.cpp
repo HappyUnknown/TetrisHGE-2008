@@ -37,9 +37,9 @@
 	{
 		pos.i--;
 	}
-	void GameSquare::move_down()
+	void GameSquare::move_down(int step)
 	{
-		pos.i++;
+		pos.i += step;
 	}
 	void GameSquare::move_left()
 	{

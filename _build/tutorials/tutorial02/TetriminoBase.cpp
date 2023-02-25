@@ -32,10 +32,10 @@
 		for(int i=0;i<squares.size();i++)
 			squares[i].move_up();
 	}
-	void TetrominoBase::move_down()
+	void TetrominoBase::move_down(int step)
 	{
 		for(int i=0;i<squares.size();i++)
-			squares[i].move_down();
+			squares[i].move_down(step);
 	}
 	void TetrominoBase::move_left()
 	{
@@ -129,13 +129,13 @@
 					return true;
 		return false;
 	}
-	std::vector<GameSquare> TetrominoBase::preview_down()
+	std::vector<GameSquare> TetrominoBase::preview_down(int step)
 	{
 		std::vector<GameSquare> preview;
 		for(int i=0;i<squares.size();i++)
 		{
 			GameSquare temp = squares[i];
-			temp.move_down();
+			temp.move_down(step);
 			preview.push_back(temp);
 		}
 		return preview;
@@ -223,4 +223,21 @@
 		for(int i=0;i<squares.size();i++)
 			if(squares[i].pos.i < iVal)
 				squares[i].pos.i++;
+	}
+	bool TetrominoBase::takes_position(Position pos)
+	{
+		for(int i=0;i<squares.size();i++)
+			if(squares[i].pos.i == pos.i && squares[i].pos.j == pos.j)
+				return true;
+		return false;
+	}
+	//j parameter overload is not being used in code, but can be used when we need to define currents's maximum on column
+	int TetrominoBase::max_i(int j)
+	{
+		int maxI = INT_MIN;
+		for(int i=0;i<squares.size();i++)
+			if(maxI < squares[i].pos.i)
+				if(j==-1 || j==squares[i].pos.j)
+					maxI = squares[i].pos.i;
+		return maxI;
 	}
