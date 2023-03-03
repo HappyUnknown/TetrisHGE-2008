@@ -1,4 +1,85 @@
 #include "TetrisAudio.h"
+struct TetrisMenu
+{
+	HEFFECT	menuSND;
+	HTEXTURE menuCRSTex;
+	hgeQuad	menuBackIMG;
+	hgeGUI *menuGUI;
+	hgeFont	*menuFNT;
+	hgeSprite *menuCursorSPR;
+	bool menu_setup(HGE*hge, bool animate, char*charlineWidth, char*charlineHeight,char*charlineHardness, TetrisAudio& player)
+	{
+		// Offload music, in case you are finishing
+		player.stop_backmusic(hge);
+		// Load sound and textures
+		menuBackIMG.tex=hge->Texture_Load(GameConstants::get_background_path().c_str());
+		menuCRSTex=hge->Texture_Load("cursor.png");
+		menuSND=hge->Effect_Load("menu.wav");
+		if(!menuBackIMG.tex || !menuCRSTex || !menuSND)
+		{
+			// If one of the data files is not found, display
+			// an error message and shutdown.
+			MessageBox(NULL, "Can't load BG.PNG, CURSOR.PNG or WAV", "Error", MB_OK | MB_ICONERROR | MB_APPLMODAL);
+			hge->System_Shutdown();
+			hge->Release();
+			return false;
+		}
+
+		// Set up the quad we will use for background animation
+		menuBackIMG.blend=BLEND_ALPHABLEND | BLEND_COLORMUL | BLEND_NOZWRITE;
+
+		for(int i=0;i<4;i++)
+		{
+			// Set up z-coordinate of vertices
+			menuBackIMG.v[i].z=0.5f;
+			// Set up color. The format of DWORD col is 0xAARRGGBB
+			menuBackIMG.v[i].col=TetrominoColors::get_color_by_id(TetrominoColors::Black);
+		}
+
+		menuBackIMG.v[0].x=0; menuBackIMG.v[0].y=0; 
+		menuBackIMG.v[1].x=800; menuBackIMG.v[1].y=0; 
+		menuBackIMG.v[2].x=800; menuBackIMG.v[2].y=600; 
+		menuBackIMG.v[3].x=0; menuBackIMG.v[3].y=600; 
+
+
+		// Load the font, create the cursor sprite
+		menuFNT=new hgeFont("font1.fnt");
+		menuCursorSPR=new hgeSprite(menuCRSTex,0,0,32,32);
+
+		// Create and initialize the GUI
+		menuGUI=new hgeGUI();
+
+		const int START_X = 400, START_Y = 200, STEP_Y = 40, PADDING = 150;
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::Play, menuFNT, menuSND, START_X, START_Y + STEP_Y*0, animate?0.0f:0, "Play"));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::Resume, menuFNT, menuSND, START_X, START_Y + STEP_Y*1, animate?0.1f:0, "Resume"));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::WidthLess, menuFNT, menuSND, START_X-PADDING, START_Y + STEP_Y*2, animate?0.2f:0, "-WIDTH"));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::WidthLess, menuFNT, menuSND, START_X, START_Y + STEP_Y*2, animate?0.2f:0, charlineWidth));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::WidthMore, menuFNT, menuSND, START_X+PADDING, START_Y + STEP_Y*2, animate?0.2f:0, "+WIDTH"));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HeightLess, menuFNT, menuSND, START_X-PADDING, START_Y + STEP_Y*3, animate?0.3f:0, "-HEIGTH"));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HeightLess, menuFNT, menuSND, START_X, START_Y + STEP_Y*3, animate?0.3f:0, charlineHeight));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HeightMore, menuFNT, menuSND, START_X+PADDING, START_Y + STEP_Y*3, animate?0.3f:0, "+HEIGTH"));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HardnessLess, menuFNT, menuSND, START_X-PADDING, START_Y + STEP_Y*4, animate?0.4f:0, "-HARDNESS"));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HardnessLess, menuFNT, menuSND, START_X, START_Y + STEP_Y*4, animate?0.4f:0, charlineHardness));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HardnessMore, menuFNT, menuSND, START_X+PADDING, START_Y + STEP_Y*4, animate?0.4f:0, "+HARDNESS"));
+		menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::Exit, menuFNT, menuSND, START_X, START_Y + STEP_Y*5, animate?0.5f:0, "Exit"));
+
+		menuGUI->SetNavMode(HGEGUI_UPDOWN | HGEGUI_CYCLED);
+		menuGUI->SetCursor(menuCursorSPR);
+		menuGUI->SetFocus(1);
+		menuGUI->Enter();
+		return true;
+	}
+	void menu_dispose(HGE*hge)
+	{
+		// Delete created objects and free loaded resources
+		delete menuGUI;
+		delete menuFNT;
+		delete menuCursorSPR;
+		hge->Effect_Free(menuSND);
+		hge->Texture_Free(menuCRSTex);
+		hge->Texture_Free(menuBackIMG.tex);
+	}
+};
 struct Tetris
 {	
 	TetrisAudio player;
@@ -12,24 +93,13 @@ struct Tetris
 	void dispose_score_font();
 	#pragma endregion
 	#pragma region MENU
-		HEFFECT	menuSND;
-		HTEXTURE menuCRSTex;
-		hgeQuad	menuBackIMG;
-		hgeGUI *menuGUI;
-		hgeFont	*menuFNT;
-		hgeSprite *menuCursorSPR;
-
-		void animate_background(HGE*hge, float dt, float speedMultiplier = 1.0f);
+		TetrisMenu menu;
 		void enter_game(bool resume);
-		int read_correct_field_width();
-		int read_correct_field_height();
-		bool menu_process_selection(HGE*hge, float dt);
-		bool menu_frame_func(HGE*hge);
-		bool menu_setup(HGE*hge, bool animate = true);
+		MenuOptions menu_process_selection(HGE*hge, float dt);
+		MenuOptions menu_frame_func(HGE*hge);
+		//bool Tetris::menu_setup(HGE*hge, bool animate, char*charlineWidth, char*charlineHeight,char*charlineHardness);
 		void enter_menu();
-		void menu_render_func(float animationSpeed = 1.0f);
-		void render_animated_background(HGE* hge, float dt, float speedMultiplier);
-		void menu_dispose(HGE*hge);
+		//void menu_dispose(HGE*hge);
 	#pragma endregion
 
 	GameMode mode;
@@ -46,6 +116,9 @@ struct Tetris
 	double squareTexStartX, squareTexStartY;
 	int initI, initJ;
 	Tetris();
+	void menu_render_func(float animationSpeed = 1.0f);
+	void animate_background(HGE*hge, float dt, float speedMultiplier = 1.0f);
+	void render_animated_background(HGE* hge, float dt, float speedMultiplier);
 	int get_min_width();
 	void set_sessional_hardness(Hardness hardness);
 	void current_left();
@@ -54,6 +127,8 @@ struct Tetris
 	void current_down(int step);
 	void current_clockwise();
 	void current_counterclockwise();
+	int read_correct_field_width();
+	int read_correct_field_height();
 	int squares_on_width();
 	int squares_on_height();
 	int free_framecells_x();

@@ -1,7 +1,8 @@
 #include "GameMode.h"
 enum MenuOptions
 {
-	Play = 1,
+	Default = 0,
+	Play,
 	Resume,
 	WidthLess,
 	WidthMore,

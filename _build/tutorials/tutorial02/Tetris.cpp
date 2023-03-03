@@ -28,14 +28,14 @@
 			t += dt * speedMultiplier;
 			tx = 50*cosf(t/60);
 			ty = 50*sinf(t/60);
-			menuBackIMG.v[0].tx = tx;        
-			menuBackIMG.v[0].ty = ty;
-			menuBackIMG.v[1].tx = tx+GameConstants::FRAMEX/64; 
-			menuBackIMG.v[1].ty = ty;
-			menuBackIMG.v[2].tx = tx+GameConstants::FRAMEX/64; 
-			menuBackIMG.v[2].ty = ty+GameConstants::FRAMEY/64;
-			menuBackIMG.v[3].tx = tx;
-			menuBackIMG.v[3].ty = ty+GameConstants::FRAMEY/64;
+			menu.menuBackIMG.v[0].tx = tx;        
+			menu.menuBackIMG.v[0].ty = ty;
+			menu.menuBackIMG.v[1].tx = tx+GameConstants::FRAMEX/64; 
+			menu.menuBackIMG.v[1].ty = ty;
+			menu.menuBackIMG.v[2].tx = tx+GameConstants::FRAMEX/64; 
+			menu.menuBackIMG.v[2].ty = ty+GameConstants::FRAMEY/64;
+			menu.menuBackIMG.v[3].tx = tx;
+			menu.menuBackIMG.v[3].ty = ty+GameConstants::FRAMEY/64;
 		}
 		void Tetris::enter_game(bool resume)
 		{
@@ -93,23 +93,27 @@
 			return height;
 
 		}
-		bool Tetris::menu_process_selection(HGE*hge, float dt)
+		MenuOptions Tetris::menu_process_selection(HGE*hge, float dt)
 		{
+			char* charlineWidth = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_width()));
+			char* charlineHeight = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_height()));
+			char* charlineHardness = StringExtensions::to_char_array(TetrisSettings::read_setting_value("hardness_mode"));
+
 			int valueRead;
 
 			int id;
-			static int lastid=0;
-			id=menuGUI->Update(dt);
+			static int lastid=MenuOptions::Default;
+			id=menu.menuGUI->Update(dt);
 			if(id == -1)
 			{
 				switch(lastid)
 				{
 				case MenuOptions::Play:
 					enter_game(false);
-					break;
+					return MenuOptions::Play;
 				case MenuOptions::Resume:
 					enter_game(true);
-					break;
+					return MenuOptions::Resume;
 				case MenuOptions::WidthLess:
 					 valueRead = read_correct_field_width();
 					 if(valueRead > get_min_width())
@@ -118,12 +122,12 @@
 							TetrisSettings::edit_setting("field_width", StringExtensions::to_string(--valueRead));
 						else
 							TetrisSettings::add_setting("field_width", StringExtensions::to_string(--valueRead));
-						menu_setup(hge, false);//refreshes menu settings
+						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);//refreshes menu settings
 						TetrisSession::reset_session();
 					 }
-					menuGUI->SetFocus(1);
-					menuGUI->Enter();
-					break;
+					menu.menuGUI->SetFocus(1);
+					menu.menuGUI->Enter();
+					return MenuOptions::WidthLess;
 				case MenuOptions::WidthMore:
 					valueRead = read_correct_field_width();
 					if(valueRead < GameConstants::MAX_FIELD_WIDTH)
@@ -132,12 +136,12 @@
 							TetrisSettings::edit_setting("field_width", StringExtensions::to_string(++valueRead));
 						else
 							TetrisSettings::add_setting("field_width", StringExtensions::to_string(++valueRead));
-						menu_setup(hge, false);
+						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
 						TetrisSession::reset_session();
 					}
-					menuGUI->SetFocus(1);
-					menuGUI->Enter();
-					break;
+					menu.menuGUI->SetFocus(1);
+					menu.menuGUI->Enter();
+					return MenuOptions::WidthMore;
 				case MenuOptions::HeightLess:
 					valueRead = read_correct_field_height();
 					if(valueRead > GameConstants::MIN_FIELD_HEIGHT)
@@ -146,12 +150,12 @@
 							TetrisSettings::edit_setting("field_height", StringExtensions::to_string(--valueRead));
 						else
 							TetrisSettings::add_setting("field_height", StringExtensions::to_string(--valueRead));
-						menu_setup(hge, false);
+						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
 						TetrisSession::reset_session();
 					}
-					menuGUI->SetFocus(1);
-					menuGUI->Enter();
-					break;
+					menu.menuGUI->SetFocus(1);
+					menu.menuGUI->Enter();
+					return MenuOptions::HeightLess;
 				case MenuOptions::HeightMore:
 					valueRead = read_correct_field_height();
 					if(valueRead < GameConstants::MAX_FIELD_HEIGHT)
@@ -160,12 +164,12 @@
 							TetrisSettings::edit_setting("field_height", StringExtensions::to_string(++valueRead));
 						else
 							TetrisSettings::add_setting("field_height", StringExtensions::to_string(++valueRead));
-						menu_setup(hge, false);
+						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
 						TetrisSession::reset_session();
 					}
-					menuGUI->SetFocus(1);
-					menuGUI->Enter();
-					break;
+					menu.menuGUI->SetFocus(1);
+					menu.menuGUI->Enter();
+					return MenuOptions::HeightMore;
 				case MenuOptions::HardnessLess:
 					valueRead = StringExtensions::int_parse(TetrisSettings::read_setting_value("hardness_mode"));
 					if(valueRead > Hardness::Easy)
@@ -174,12 +178,12 @@
 							TetrisSettings::edit_setting("hardness_mode", StringExtensions::to_string(--valueRead));
 						else
 							TetrisSettings::add_setting("hardness_mode", StringExtensions::to_string(--valueRead));
-						menu_setup(hge, false);
+						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
 						TetrisSession::reset_session();
 					}
-					menuGUI->SetFocus(1);
-					menuGUI->Enter();
-					break;
+					menu.menuGUI->SetFocus(1);
+					menu.menuGUI->Enter();
+					return MenuOptions::HardnessLess;
 				case MenuOptions::HardnessMore:
 					valueRead = StringExtensions::int_parse(TetrisSettings::read_setting_value("hardness_mode"));
 					if(valueRead < Hardness::Hard)
@@ -188,123 +192,55 @@
 							TetrisSettings::edit_setting("hardness_mode", StringExtensions::to_string(++valueRead));
 						else
 							TetrisSettings::add_setting("hardness_mode", StringExtensions::to_string(++valueRead));
-						menu_setup(hge, false);
+						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
 						TetrisSession::reset_session();
 					}
-					menuGUI->SetFocus(1);
-					menuGUI->Enter();
-					break;
+					menu.menuGUI->SetFocus(1);
+					menu.menuGUI->Enter();
+					return MenuOptions::HardnessMore;
 				case MenuOptions::Exit:
-					return true;
+					return MenuOptions::Exit;
 				}
 			}
 			else if(id) 
 			{ 
 				lastid=id; 
-				menuGUI->Leave(); 
+				menu.menuGUI->Leave(); 
 			}
-			return false;
+			return MenuOptions::Default;
 		}
-		bool Tetris::menu_frame_func(HGE*hge)
+		MenuOptions Tetris::menu_frame_func(HGE*hge)
 		{
 			float dt=hge->Timer_GetDelta();
-			if(menu_process_selection(hge,dt) || hge->Input_KeyDown(HGEK_ESCAPE)) return true;
+			MenuOptions options = menu_process_selection(hge, dt);
+			if(options != MenuOptions::Default)
+				popup(StringExtensions::to_string(options));
+			if(options == MenuOptions::Exit || hge->Input_KeyDown(HGEK_ESCAPE))
+				return MenuOptions::Exit;
 
-			return false;
+			return MenuOptions::Default;
 		}
 		
-		bool Tetris::menu_setup(HGE*hge, bool animate)
+		void Tetris::enter_menu()
 		{
-			// Offload music, in case you are finishing
-			player.stop_backmusic(hge);
-			// Load sound and textures
-			menuBackIMG.tex=hge->Texture_Load(GameConstants::get_background_path().c_str());
-			menuCRSTex=hge->Texture_Load("cursor.png");
-			menuSND=hge->Effect_Load("menu.wav");
-			if(!menuBackIMG.tex || !menuCRSTex || !menuSND)
-			{
-				// If one of the data files is not found, display
-				// an error message and shutdown.
-				MessageBox(NULL, "Can't load BG.PNG, CURSOR.PNG or MENU.WAV", "Error", MB_OK | MB_ICONERROR | MB_APPLMODAL);
-				hge->System_Shutdown();
-				hge->Release();
-				return false;
-			}
-
-			// Set up the quad we will use for background animation
-			menuBackIMG.blend=BLEND_ALPHABLEND | BLEND_COLORMUL | BLEND_NOZWRITE;
-
-			for(int i=0;i<4;i++)
-			{
-				// Set up z-coordinate of vertices
-				menuBackIMG.v[i].z=0.5f;
-				// Set up color. The format of DWORD col is 0xAARRGGBB
-				menuBackIMG.v[i].col=TetrominoColors::get_color_by_id(TetrominoColors::Black);
-			}
-
-			menuBackIMG.v[0].x=0; menuBackIMG.v[0].y=0; 
-			menuBackIMG.v[1].x=800; menuBackIMG.v[1].y=0; 
-			menuBackIMG.v[2].x=800; menuBackIMG.v[2].y=600; 
-			menuBackIMG.v[3].x=0; menuBackIMG.v[3].y=600; 
-
-
-			// Load the font, create the cursor sprite
-			menuFNT=new hgeFont("font1.fnt");
-			menuCursorSPR=new hgeSprite(menuCRSTex,0,0,32,32);
-
-			// Create and initialize the GUI
-			menuGUI=new hgeGUI();
-
 			char* charlineWidth = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_width()));
 			char* charlineHeight = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_height()));
 			char* charlineHardness = StringExtensions::to_char_array(TetrisSettings::read_setting_value("hardness_mode"));
 
-			const int START_X = 400, START_Y = 200, STEP_Y = 40, PADDING = 150;
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::Play, menuFNT, menuSND, START_X, START_Y + STEP_Y*0, animate?0.0f:0, "Play"));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::Resume, menuFNT, menuSND, START_X, START_Y + STEP_Y*1, animate?0.1f:0, "Resume"));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::WidthLess, menuFNT, menuSND, START_X-PADDING, START_Y + STEP_Y*2, animate?0.2f:0, "-WIDTH"));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::WidthLess, menuFNT, menuSND, START_X, START_Y + STEP_Y*2, animate?0.2f:0, charlineWidth));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::WidthMore, menuFNT, menuSND, START_X+PADDING, START_Y + STEP_Y*2, animate?0.2f:0, "+WIDTH"));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HeightLess, menuFNT, menuSND, START_X-PADDING, START_Y + STEP_Y*3, animate?0.3f:0, "-HEIGTH"));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HeightLess, menuFNT, menuSND, START_X, START_Y + STEP_Y*3, animate?0.3f:0, charlineHeight));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HeightMore, menuFNT, menuSND, START_X+PADDING, START_Y + STEP_Y*3, animate?0.3f:0, "+HEIGTH"));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HardnessLess, menuFNT, menuSND, START_X-PADDING, START_Y + STEP_Y*4, animate?0.4f:0, "-HARDNESS"));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HardnessLess, menuFNT, menuSND, START_X, START_Y + STEP_Y*4, animate?0.4f:0, charlineHardness));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::HardnessMore, menuFNT, menuSND, START_X+PADDING, START_Y + STEP_Y*4, animate?0.4f:0, "+HARDNESS"));
-			menuGUI->AddCtrl(new hgeGUIMenuItem(MenuOptions::Exit, menuFNT, menuSND, START_X, START_Y + STEP_Y*5, animate?0.5f:0, "Exit"));
-
-			menuGUI->SetNavMode(HGEGUI_UPDOWN | HGEGUI_CYCLED);
-			menuGUI->SetCursor(menuCursorSPR);
-			menuGUI->SetFocus(1);
-			menuGUI->Enter();
-			return true;
-		}
-		void Tetris::enter_menu()
-		{
-			menu_setup(hge);
+			menu.menu_setup(hge, true, charlineWidth, charlineHeight, charlineHardness, player);
 			mode = GameMode::Menu;
 		}
 		void Tetris::menu_render_func(float animationSpeed)
 		{
 			float dt = hge->Timer_GetDelta();
 			render_animated_background(hge, dt, animationSpeed); //multiplier just does not care
-			menuGUI->Render();
-			menuFNT->SetColor(TetrominoColors::White);
+			menu.menuGUI->Render();
+			menu.menuFNT->SetColor(TetrominoColors::White);
 		}
 		void Tetris::render_animated_background(HGE* hge, float dt, float speedMultiplier)
 		{
-			hge->Gfx_RenderQuad(&menuBackIMG);
+			hge->Gfx_RenderQuad(&menu.menuBackIMG);
 			animate_background(hge,dt,speedMultiplier);
-		}
-		void Tetris::menu_dispose(HGE*hge)
-		{
-			// Delete created objects and free loaded resources
-			delete menuGUI;
-			delete menuFNT;
-			delete menuCursorSPR;
-			hge->Effect_Free(menuSND);
-			hge->Texture_Free(menuCRSTex);
-			hge->Texture_Free(menuBackIMG.tex);
 		}
 	Tetris::Tetris()
 	{

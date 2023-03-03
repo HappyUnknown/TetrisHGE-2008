@@ -6,7 +6,7 @@ bool FrameFunc()
 {
 	if(game.mode == GameMode::Menu)
 	{
-		if(game.menu_frame_func(game.hge))
+		if(game.menu_frame_func(game.hge) == MenuOptions::Exit)
 			return true;
 	}
 	else if(game.mode == GameMode::Game)
