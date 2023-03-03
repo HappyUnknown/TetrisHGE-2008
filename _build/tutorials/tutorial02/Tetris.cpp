@@ -93,129 +93,110 @@
 			return height;
 
 		}
-		MenuOptions Tetris::menu_process_selection(HGE*hge, float dt)
+		MenuOptions Tetris::menu_frame_func(HGE*hge)
 		{
+			float dt=hge->Timer_GetDelta();
+			
 			char* charlineWidth = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_width()));
 			char* charlineHeight = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_height()));
 			char* charlineHardness = StringExtensions::to_char_array(TetrisSettings::read_setting_value("hardness_mode"));
 
-			int valueRead;
-
-			int id;
-			static int lastid=MenuOptions::Default;
-			id=menu.menuGUI->Update(dt);
-			if(id == -1)
+			MenuOptions options = menu.menu_process_selection(hge, dt, charlineWidth, charlineHeight, charlineHardness);
+			if(options == MenuOptions::Play)
+				enter_game(false);
+			else if(options == MenuOptions::Resume)
+				enter_game(true);
+			else if(options == MenuOptions::WidthLess)
 			{
-				switch(lastid)
-				{
-				case MenuOptions::Play:
-					enter_game(false);
-					return MenuOptions::Play;
-				case MenuOptions::Resume:
-					enter_game(true);
-					return MenuOptions::Resume;
-				case MenuOptions::WidthLess:
-					 valueRead = read_correct_field_width();
-					 if(valueRead > get_min_width())
-					 {	
-						if(TetrisSettings::setting_exists("field_width"))
-							TetrisSettings::edit_setting("field_width", StringExtensions::to_string(--valueRead));
-						else
-							TetrisSettings::add_setting("field_width", StringExtensions::to_string(--valueRead));
-						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);//refreshes menu settings
-						TetrisSession::reset_session();
-					 }
-					menu.menuGUI->SetFocus(1);
-					menu.menuGUI->Enter();
-					return MenuOptions::WidthLess;
-				case MenuOptions::WidthMore:
-					valueRead = read_correct_field_width();
-					if(valueRead < GameConstants::MAX_FIELD_WIDTH)
-					{
-						if(TetrisSettings::setting_exists("field_width"))
-							TetrisSettings::edit_setting("field_width", StringExtensions::to_string(++valueRead));
-						else
-							TetrisSettings::add_setting("field_width", StringExtensions::to_string(++valueRead));
-						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
-						TetrisSession::reset_session();
-					}
-					menu.menuGUI->SetFocus(1);
-					menu.menuGUI->Enter();
-					return MenuOptions::WidthMore;
-				case MenuOptions::HeightLess:
-					valueRead = read_correct_field_height();
-					if(valueRead > GameConstants::MIN_FIELD_HEIGHT)
-					{
-						if(TetrisSettings::setting_exists("field_height"))
-							TetrisSettings::edit_setting("field_height", StringExtensions::to_string(--valueRead));
-						else
-							TetrisSettings::add_setting("field_height", StringExtensions::to_string(--valueRead));
-						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
-						TetrisSession::reset_session();
-					}
-					menu.menuGUI->SetFocus(1);
-					menu.menuGUI->Enter();
-					return MenuOptions::HeightLess;
-				case MenuOptions::HeightMore:
-					valueRead = read_correct_field_height();
-					if(valueRead < GameConstants::MAX_FIELD_HEIGHT)
-					{
-						if(TetrisSettings::setting_exists("field_height"))
-							TetrisSettings::edit_setting("field_height", StringExtensions::to_string(++valueRead));
-						else
-							TetrisSettings::add_setting("field_height", StringExtensions::to_string(++valueRead));
-						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
-						TetrisSession::reset_session();
-					}
-					menu.menuGUI->SetFocus(1);
-					menu.menuGUI->Enter();
-					return MenuOptions::HeightMore;
-				case MenuOptions::HardnessLess:
-					valueRead = StringExtensions::int_parse(TetrisSettings::read_setting_value("hardness_mode"));
-					if(valueRead > Hardness::Easy)
-					{
-						if(TetrisSettings::setting_exists("hardness_mode"))
-							TetrisSettings::edit_setting("hardness_mode", StringExtensions::to_string(--valueRead));
-						else
-							TetrisSettings::add_setting("hardness_mode", StringExtensions::to_string(--valueRead));
-						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
-						TetrisSession::reset_session();
-					}
-					menu.menuGUI->SetFocus(1);
-					menu.menuGUI->Enter();
-					return MenuOptions::HardnessLess;
-				case MenuOptions::HardnessMore:
-					valueRead = StringExtensions::int_parse(TetrisSettings::read_setting_value("hardness_mode"));
-					if(valueRead < Hardness::Hard)
-					{
-						if(TetrisSettings::setting_exists("hardness_mode"))
-							TetrisSettings::edit_setting("hardness_mode", StringExtensions::to_string(++valueRead));
-						else
-							TetrisSettings::add_setting("hardness_mode", StringExtensions::to_string(++valueRead));
-						menu.menu_setup(hge, false, charlineWidth, charlineHeight, charlineHardness, player);
-						TetrisSession::reset_session();
-					}
-					menu.menuGUI->SetFocus(1);
-					menu.menuGUI->Enter();
-					return MenuOptions::HardnessMore;
-				case MenuOptions::Exit:
-					return MenuOptions::Exit;
+				int valueRead = read_correct_field_width();
+				if(valueRead > get_min_width())
+				{	
+					if(TetrisSettings::setting_exists("field_width"))
+						TetrisSettings::edit_setting("field_width", StringExtensions::to_string(--valueRead));
+					else
+						TetrisSettings::add_setting("field_width", StringExtensions::to_string(--valueRead));
+					this->menu_setup_loaded();//refreshes menu settings
+					TetrisSession::reset_session();
 				}
+				menu.menuGUI->SetFocus(1);
+				menu.menuGUI->Enter();
 			}
-			else if(id) 
-			{ 
-				lastid=id; 
-				menu.menuGUI->Leave(); 
+			else if(options == MenuOptions::WidthMore)
+			{
+				int valueRead = read_correct_field_width();
+				if(valueRead < GameConstants::MAX_FIELD_WIDTH)
+				{
+					if(TetrisSettings::setting_exists("field_width"))
+						TetrisSettings::edit_setting("field_width", StringExtensions::to_string(++valueRead));
+					else
+						TetrisSettings::add_setting("field_width", StringExtensions::to_string(++valueRead));
+					this->menu_setup_loaded();//refreshes menu settings
+					TetrisSession::reset_session();
+				}
+				menu.menuGUI->SetFocus(1);
+				menu.menuGUI->Enter();
 			}
-			return MenuOptions::Default;
-		}
-		MenuOptions Tetris::menu_frame_func(HGE*hge)
-		{
-			float dt=hge->Timer_GetDelta();
-			MenuOptions options = menu_process_selection(hge, dt);
-			if(options != MenuOptions::Default)
-				popup(StringExtensions::to_string(options));
-			if(options == MenuOptions::Exit || hge->Input_KeyDown(HGEK_ESCAPE))
+			else if(options == MenuOptions::HeightLess)
+			{
+				int valueRead = read_correct_field_height();
+				if(valueRead > GameConstants::MIN_FIELD_HEIGHT)
+				{
+					if(TetrisSettings::setting_exists("field_height"))
+						TetrisSettings::edit_setting("field_height", StringExtensions::to_string(--valueRead));
+					else
+						TetrisSettings::add_setting("field_height", StringExtensions::to_string(--valueRead));
+					this->menu_setup_loaded();//refreshes menu settings
+					TetrisSession::reset_session();
+				}
+				menu.menuGUI->SetFocus(1);
+				menu.menuGUI->Enter();
+			}
+			else if(options == MenuOptions::HeightMore)
+			{
+				int valueRead = read_correct_field_height();
+				if(valueRead < GameConstants::MAX_FIELD_HEIGHT)
+				{
+					if(TetrisSettings::setting_exists("field_height"))
+						TetrisSettings::edit_setting("field_height", StringExtensions::to_string(++valueRead));
+					else
+						TetrisSettings::add_setting("field_height", StringExtensions::to_string(++valueRead));
+					this->menu_setup_loaded();//refreshes menu settings
+					TetrisSession::reset_session();
+				}
+				menu.menuGUI->SetFocus(1);
+				menu.menuGUI->Enter();
+			}
+			else if(options == MenuOptions::HardnessLess)
+			{
+				int valueRead = StringExtensions::int_parse(TetrisSettings::read_setting_value("hardness_mode"));
+				if(valueRead > Hardness::Easy)
+				{
+					if(TetrisSettings::setting_exists("hardness_mode"))
+						TetrisSettings::edit_setting("hardness_mode", StringExtensions::to_string(--valueRead));
+					else
+						TetrisSettings::add_setting("hardness_mode", StringExtensions::to_string(--valueRead));
+					this->menu_setup_loaded();//refreshes menu settings
+					TetrisSession::reset_session();
+				}
+				menu.menuGUI->SetFocus(1);
+				menu.menuGUI->Enter();
+			}
+			else if(options == MenuOptions::HardnessMore)
+			{
+				int valueRead = StringExtensions::int_parse(TetrisSettings::read_setting_value("hardness_mode"));
+				if(valueRead < Hardness::Hard)
+				{
+					if(TetrisSettings::setting_exists("hardness_mode"))
+						TetrisSettings::edit_setting("hardness_mode", StringExtensions::to_string(++valueRead));
+					else
+						TetrisSettings::add_setting("hardness_mode", StringExtensions::to_string(++valueRead));
+					this->menu_setup_loaded();//refreshes menu settings
+					TetrisSession::reset_session();
+				}
+				menu.menuGUI->SetFocus(1);
+				menu.menuGUI->Enter();
+			}
+			else if(options == MenuOptions::Exit || hge->Input_KeyDown(HGEK_ESCAPE))
 				return MenuOptions::Exit;
 
 			return MenuOptions::Default;
@@ -223,11 +204,7 @@
 		
 		void Tetris::enter_menu()
 		{
-			char* charlineWidth = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_width()));
-			char* charlineHeight = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_height()));
-			char* charlineHardness = StringExtensions::to_char_array(TetrisSettings::read_setting_value("hardness_mode"));
-
-			menu.menu_setup(hge, true, charlineWidth, charlineHeight, charlineHardness, player);
+			menu_setup_loaded(true);
 			mode = GameMode::Menu;
 		}
 		void Tetris::menu_render_func(float animationSpeed)

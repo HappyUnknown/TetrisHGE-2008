@@ -69,6 +69,114 @@ struct TetrisMenu
 		menuGUI->Enter();
 		return true;
 	}
+	MenuOptions menu_process_selection(HGE*hge, float dt, char* charlineWidth, char* charlineHeight, char* charlineHardness)
+	{
+		int id;
+		static int lastid=MenuOptions::Default;
+		id=menuGUI->Update(dt);
+		if(id == -1)
+		{
+			switch(lastid)
+			{
+			case MenuOptions::Play:
+				//enter_game(false);
+				return MenuOptions::Play;
+			case MenuOptions::Resume:
+				//enter_game(true);
+				return MenuOptions::Resume;
+			case MenuOptions::WidthLess:
+				//valueRead = read_correct_field_width();
+				//if(valueRead > get_min_width())
+				//{	
+					//if(TetrisSettings::setting_exists("field_width"))
+					//	TetrisSettings::edit_setting("field_width", StringExtensions::to_string(--valueRead));
+					//else
+					//	TetrisSettings::add_setting("field_width", StringExtensions::to_string(--valueRead));
+					//this->menu_setup_loaded();//refreshes menu settings
+					//TetrisSession::reset_session();
+				//}
+				return MenuOptions::WidthLess;
+			case MenuOptions::WidthMore:
+				//valueRead = read_correct_field_width();
+				//if(valueRead < GameConstants::MAX_FIELD_WIDTH)
+				//{
+				//	if(TetrisSettings::setting_exists("field_width"))
+				//		TetrisSettings::edit_setting("field_width", StringExtensions::to_string(++valueRead));
+				//	else
+				//		TetrisSettings::add_setting("field_width", StringExtensions::to_string(++valueRead));
+				//	this->menu_setup_loaded();//refreshes menu settings
+				//	TetrisSession::reset_session();
+				//}
+				//menu.menuGUI->SetFocus(1);
+				//menu.menuGUI->Enter();
+				return MenuOptions::WidthMore;
+			case MenuOptions::HeightLess:
+				//valueRead = read_correct_field_height();
+				//if(valueRead > GameConstants::MIN_FIELD_HEIGHT)
+				//{
+				//	if(TetrisSettings::setting_exists("field_height"))
+				//		TetrisSettings::edit_setting("field_height", StringExtensions::to_string(--valueRead));
+				//	else
+				//		TetrisSettings::add_setting("field_height", StringExtensions::to_string(--valueRead));
+				//	this->menu_setup_loaded();//refreshes menu settings
+				//	TetrisSession::reset_session();
+				//}
+				//menu.menuGUI->SetFocus(1);
+				//menu.menuGUI->Enter();
+				return MenuOptions::HeightLess;
+			case MenuOptions::HeightMore:
+				//valueRead = read_correct_field_height();
+				//if(valueRead < GameConstants::MAX_FIELD_HEIGHT)
+				//{
+				//	if(TetrisSettings::setting_exists("field_height"))
+				//		TetrisSettings::edit_setting("field_height", StringExtensions::to_string(++valueRead));
+				//	else
+				//		TetrisSettings::add_setting("field_height", StringExtensions::to_string(++valueRead));
+				//	this->menu_setup_loaded();//refreshes menu settings
+				//	TetrisSession::reset_session();
+				//}
+				//menu.menuGUI->SetFocus(1);
+				//menu.menuGUI->Enter();
+				return MenuOptions::HeightMore;
+			case MenuOptions::HardnessLess:
+				//valueRead = StringExtensions::int_parse(TetrisSettings::read_setting_value("hardness_mode"));
+				//if(valueRead > Hardness::Easy)
+				//{
+				//	if(TetrisSettings::setting_exists("hardness_mode"))
+				//		TetrisSettings::edit_setting("hardness_mode", StringExtensions::to_string(--valueRead));
+				//	else
+				//		TetrisSettings::add_setting("hardness_mode", StringExtensions::to_string(--valueRead));
+				//	this->menu_setup_loaded();//refreshes menu settings
+				//	TetrisSession::reset_session();
+				//}
+				//menu.menuGUI->SetFocus(1);
+				//menu.menuGUI->Enter();
+				return MenuOptions::HardnessLess;
+			case MenuOptions::HardnessMore:
+				//valueRead = StringExtensions::int_parse(TetrisSettings::read_setting_value("hardness_mode"));
+				//if(valueRead < Hardness::Hard)
+				//{
+				//	if(TetrisSettings::setting_exists("hardness_mode"))
+				//		TetrisSettings::edit_setting("hardness_mode", StringExtensions::to_string(++valueRead));
+				//	else
+				//		TetrisSettings::add_setting("hardness_mode", StringExtensions::to_string(++valueRead));
+				//	this->menu_setup_loaded();//refreshes menu settings
+				//	TetrisSession::reset_session();
+				//}
+				//menu.menuGUI->SetFocus(1);
+				//menu.menuGUI->Enter();
+				return MenuOptions::HardnessMore;
+			case MenuOptions::Exit:
+				return MenuOptions::Exit;
+			}
+		}
+		else if(id) 
+		{ 
+			lastid=id; 
+			menuGUI->Leave(); 
+		}
+		return MenuOptions::Default;
+	}
 	void menu_dispose(HGE*hge)
 	{
 		// Delete created objects and free loaded resources
@@ -94,11 +202,9 @@ struct Tetris
 	#pragma endregion
 	#pragma region MENU
 		TetrisMenu menu;
-		void enter_game(bool resume);
-		MenuOptions menu_process_selection(HGE*hge, float dt);
+		//MenuOptions menu_process_selection(HGE*hge, float dt, char* charlineWidth, char* charlineHeight, char* charlineHardness);
 		MenuOptions menu_frame_func(HGE*hge);
 		//bool Tetris::menu_setup(HGE*hge, bool animate, char*charlineWidth, char*charlineHeight,char*charlineHardness);
-		void enter_menu();
 		//void menu_dispose(HGE*hge);
 	#pragma endregion
 
@@ -119,6 +225,7 @@ struct Tetris
 	void menu_render_func(float animationSpeed = 1.0f);
 	void animate_background(HGE*hge, float dt, float speedMultiplier = 1.0f);
 	void render_animated_background(HGE* hge, float dt, float speedMultiplier);
+	void enter_game(bool resume);
 	int get_min_width();
 	void set_sessional_hardness(Hardness hardness);
 	void current_left();
@@ -177,4 +284,12 @@ struct Tetris
 	int projection_delta(Position currentPos);
 	int current_min_projection_delta();
 	bool bell_rings_on_tick();
+	void enter_menu();
+	void Tetris::menu_setup_loaded(bool animate = false)
+	{
+		char* charlineWidth = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_width()));
+		char* charlineHeight = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_height()));
+		char* charlineHardness = StringExtensions::to_char_array(TetrisSettings::read_setting_value("hardness_mode"));
+		menu.menu_setup(hge, animate, charlineWidth, charlineHeight, charlineHardness, player);
+	}
 };
