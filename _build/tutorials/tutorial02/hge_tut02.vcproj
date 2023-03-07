@@ -560,6 +560,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TetrisMenu.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\TetrisSession.cpp"
 				>
 			</File>

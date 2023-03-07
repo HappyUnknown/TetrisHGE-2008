@@ -716,3 +716,11 @@
 		}
 		return minDeltaI;
 	}
+	
+	void Tetris::menu_setup_loaded(bool animate)
+	{
+		char* charlineWidth = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_width()));
+		char* charlineHeight = StringExtensions::to_char_array(StringExtensions::to_string(read_correct_field_height()));
+		char* charlineHardness = StringExtensions::to_char_array(TetrisSettings::read_setting_value("hardness_mode"));
+		menu.menu_setup(hge, animate, charlineWidth, charlineHeight, charlineHardness, player);
+	}
