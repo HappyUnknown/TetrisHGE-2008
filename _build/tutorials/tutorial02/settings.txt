@@ -1,5 +1,5 @@
 hardness_mode~1
-field_height~7
+field_height~12
 field_width~12
 brick_path~white_cube.png
 square_path~white_cube.png

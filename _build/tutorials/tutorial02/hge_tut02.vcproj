@@ -488,6 +488,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\TetrisMenu.h"
+				>
+			</File>
+			<File
 				RelativePath=".\TetrisSession.h"
 				>
 			</File>
