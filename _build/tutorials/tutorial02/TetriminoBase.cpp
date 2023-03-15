@@ -11,8 +11,8 @@
 	{
 		if (center != NULL)
 		{
-			for (int i = 0; i < squares.size(); i++)
-				squares[i].rotate_clockwise(*center);
+			for (int i = 0; i < batch.squares.size(); i++)
+				batch.squares[i].rotate_clockwise(*center);
 			rotations++;
 			if (rotations >= 4) rotations = 0;
 		}
@@ -21,49 +21,49 @@
 	{
 		if (center != NULL)
 		{
-			for (int i = 0; i < squares.size(); i++)
-				squares[i].rotate_counterclockwise(*center);
+			for (int i = 0; i < batch.squares.size(); i++)
+				batch.squares[i].rotate_counterclockwise(*center);
 			rotations++;
 			if (rotations >= 4) rotations = 0;
 		}
 	}
 	void TetrominoBase::move_up()
 	{
-		for(int i=0;i<squares.size();i++)
-			squares[i].move_up();
+		for(int i=0;i<batch.squares.size();i++)
+			batch.squares[i].move_up();
 	}
 	void TetrominoBase::move_down(int step)
 	{
-		for(int i=0;i<squares.size();i++)
-			squares[i].move_down(step);
+		for(int i=0;i<batch.squares.size();i++)
+			batch.squares[i].move_down(step);
 	}
 	void TetrominoBase::move_left()
 	{
-		for(int i=0;i<squares.size();i++)
-			squares[i].move_left();
+		for(int i=0;i<batch.squares.size();i++)
+			batch.squares[i].move_left();
 	}
 	void TetrominoBase::move_right()
 	{
-		for(int i=0;i<squares.size();i++)
-			squares[i].move_right();
+		for(int i=0;i<batch.squares.size();i++)
+			batch.squares[i].move_right();
 	}
 	void TetrominoBase::place()
 	{
-		for(int i=0;i<squares.size();i++)
-			squares[i].land();
+		for(int i=0;i<batch.squares.size();i++)
+			batch.squares[i].land();
 	}
 	//default value required to be false, because if there's no blocks left - we cannot judge accurately with "true" as default
 	bool TetrominoBase::is_landed()
 	{
-		for(int i=0;i<squares.size();i++)
-			if(!squares[i].landed)
+		for(int i=0;i<batch.squares.size();i++)
+			if(!batch.squares[i].landed)
 				return false;
 		return true;
 	}
 	bool TetrominoBase::intersects(TetrominoBase*tetromino)
 	{
-		for(int i=0;i<squares.size();i++)
-			if(squares[i].intersects_any(tetromino->squares))
+		for(int i=0;i<batch.squares.size();i++)
+			if(batch.squares[i].intersects_any(tetromino->batch.squares))
 				return true;
 		return false;
 	}
@@ -77,64 +77,64 @@
 	bool TetrominoBase::intersects_any(std::vector<GameSquare>crowd)
 	{
 		for(int i=0;i<crowd.size();i++)
-			if(crowd[i].intersects_any(this->squares))
+			if(crowd[i].intersects_any(this->batch.squares))
 				return true;
 		return false;
 	}
 	bool TetrominoBase::is_above(TetrominoBase*tetromino)
 	{
-		return is_above(tetromino->squares);
+		return is_above(tetromino->batch.squares);
 	}
 	bool TetrominoBase::is_above(std::vector<GameSquare>squares)
 	{
-		for(int i=0;i<this->squares.size();i++)
-			for(int j=0;j<squares.size();j++)
-				if(this->squares[i].is_above(squares[j]))
+		for(int i=0;i<this->batch.squares.size();i++)
+			for(int j=0;j<batch.squares.size();j++)
+				if(this->batch.squares[i].is_above(squares[j]))
 					return true;
 		return false;
 	}
 	bool TetrominoBase::is_under(TetrominoBase*tetromino)
 	{
-		return is_under(tetromino->squares);
+		return is_under(tetromino->batch.squares);
 	}
 	bool TetrominoBase::is_under(std::vector<GameSquare>squares)
 	{
-		for(int i=0;i<this->squares.size();i++)
-			for(int j=0;j<squares.size();j++)
-				if(this->squares[i].is_under(squares[j]))
+		for(int i=0;i<this->batch.squares.size();i++)
+			for(int j=0;j<batch.squares.size();j++)
+				if(this->batch.squares[i].is_under(squares[j]))
 					return true;
 		return false;
 	}
 	bool TetrominoBase::is_leftside(TetrominoBase*tetromino)
 	{
-		return is_leftside(tetromino->squares);
+		return is_leftside(tetromino->batch.squares);
 	}
 	bool TetrominoBase::is_leftside(std::vector<GameSquare>squares)
 	{
-		for(int i=0;i<this->squares.size();i++)
-			for(int j=0;j<squares.size();j++)
-				if(this->squares[i].is_leftside(squares[j]))
+		for(int i=0;i<this->batch.squares.size();i++)
+			for(int j=0;j<batch.squares.size();j++)
+				if(this->batch.squares[i].is_leftside(squares[j]))
 					return true;
 		return false;
 	}
 	bool TetrominoBase::is_rightside(TetrominoBase*tetromino)
 	{
-		return is_rightside(tetromino->squares);
+		return is_rightside(tetromino->batch.squares);
 	}
 	bool TetrominoBase::is_rightside(std::vector<GameSquare>squares)
 	{
-		for(int i=0;i<this->squares.size();i++)
-			for(int j=0;j<squares.size();j++)
-				if(this->squares[i].is_rightside(squares[j]))
+		for(int i=0;i<this->batch.squares.size();i++)
+			for(int j=0;j<batch.squares.size();j++)
+				if(this->batch.squares[i].is_rightside(squares[j]))
 					return true;
 		return false;
 	}
 	std::vector<GameSquare> TetrominoBase::preview_down(int step)
 	{
 		std::vector<GameSquare> preview;
-		for(int i=0;i<squares.size();i++)
+		for(int i=0;i<batch.squares.size();i++)
 		{
-			GameSquare temp = squares[i];
+			GameSquare temp = batch.squares[i];
 			temp.move_down(step);
 			preview.push_back(temp);
 		}
@@ -143,9 +143,9 @@
 	std::vector<GameSquare> TetrominoBase::preview_up()
 	{
 		std::vector<GameSquare> preview;
-		for(int i=0;i<squares.size();i++)
+		for(int i=0;i<batch.squares.size();i++)
 		{
-			GameSquare temp = squares[i];
+			GameSquare temp = batch.squares[i];
 			temp.move_up();
 			preview.push_back(temp);
 		}
@@ -154,9 +154,9 @@
 	std::vector<GameSquare> TetrominoBase::preview_left()
 	{
 		std::vector<GameSquare> preview;
-		for(int i=0;i<squares.size();i++)
+		for(int i=0;i<batch.squares.size();i++)
 		{
-			GameSquare temp = squares[i];
+			GameSquare temp = batch.squares[i];
 			temp.move_left();
 			preview.push_back(temp);
 		}
@@ -165,9 +165,9 @@
 	std::vector<GameSquare> TetrominoBase::preview_right()
 	{
 		std::vector<GameSquare> preview;
-		for(int i=0;i<squares.size();i++)
+		for(int i=0;i<batch.squares.size();i++)
 		{
-			GameSquare temp = squares[i];
+			GameSquare temp = batch.squares[i];
 			temp.move_right();
 			preview.push_back(temp);
 		}
@@ -177,9 +177,9 @@
 	{
 		std::vector<GameSquare> preview;
 		if(center!=NULL)
-			for(int i=0;i<squares.size();i++)
+			for(int i=0;i<batch.squares.size();i++)
 			{
-				GameSquare temp = squares[i];
+				GameSquare temp = batch.squares[i];
 				temp.rotate_clockwise(*center);
 				preview.push_back(temp);
 			}
@@ -189,9 +189,9 @@
 	{
 		std::vector<GameSquare> preview;
 		if(center!=NULL)
-			for(int i=0;i<squares.size();i++)
+			for(int i=0;i<batch.squares.size();i++)
 			{
-				GameSquare temp = squares[i];
+				GameSquare temp = batch.squares[i];
 				temp.rotate_counterclockwise(*center);
 				preview.push_back(temp);
 			}
@@ -201,33 +201,33 @@
 	{
 		int squareEntries = 0;
 		std::vector<GameSquare>keptSquares;
-		for(int i=0;i<squares.size();i++)
-			if(squares[i].pos.i != iVal)
+		for(int i=0;i<batch.squares.size();i++)
+			if(batch.squares[i].pos.i != iVal)
 			{
-				keptSquares.push_back(squares[i]);
+				keptSquares.push_back(batch.squares[i]);
 				squareEntries++;
 			}
-			squares = keptSquares;
+			batch.squares = keptSquares;
 			return squareEntries;
 	}
 	int TetrominoBase::count_row_squares(int iVal)
 	{
 		int squareEntries = 0;
-		for(int i=0;i<squares.size();i++)
-			if(squares[i].pos.i==iVal)
+		for(int i=0;i<batch.squares.size();i++)
+			if(batch.squares[i].pos.i==iVal)
 				squareEntries++;
 		return squareEntries;
 	}
 	void TetrominoBase::fall_above_row(int iVal)
 	{
-		for(int i=0;i<squares.size();i++)
-			if(squares[i].pos.i < iVal)
-				squares[i].pos.i++;
+		for(int i=0;i<batch.squares.size();i++)
+			if(batch.squares[i].pos.i < iVal)
+				batch.squares[i].pos.i++;
 	}
 	bool TetrominoBase::takes_position(Position pos)
 	{
-		for(int i=0;i<squares.size();i++)
-			if(squares[i].pos.i == pos.i && squares[i].pos.j == pos.j)
+		for(int i=0;i<batch.squares.size();i++)
+			if(batch.squares[i].pos.i == pos.i && batch.squares[i].pos.j == pos.j)
 				return true;
 		return false;
 	}
@@ -235,9 +235,9 @@
 	int TetrominoBase::max_i(int j)
 	{
 		int maxI = INT_MIN;
-		for(int i=0;i<squares.size();i++)
-			if(maxI < squares[i].pos.i)
-				if(j==-1 || j==squares[i].pos.j)
-					maxI = squares[i].pos.i;
+		for(int i=0;i<batch.squares.size();i++)
+			if(maxI < batch.squares[i].pos.i)
+				if(j==-1 || j==batch.squares[i].pos.j)
+					maxI = batch.squares[i].pos.i;
 		return maxI;
 	}

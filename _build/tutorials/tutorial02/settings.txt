@@ -1,6 +1,6 @@
 hardness_mode~1
 field_height~12
-field_width~12
+field_width~13
 brick_path~white_cube.png
 square_path~white_cube.png
 brick_tex_start_x~0.0

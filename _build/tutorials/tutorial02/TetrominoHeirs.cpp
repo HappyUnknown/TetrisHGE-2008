@@ -16,7 +16,7 @@
 			square.pos.i = initialPosition[i].i+initI;
 			square.pos.j = initialPosition[i].j+initJ;
 			square.landed = false;
-			squares.push_back(square);
+			batch.squares.push_back(square);
 		}
 		detect_center();
 	}
@@ -25,7 +25,7 @@
 		TetrominoI temp;
 		temp.figureType = figureType;
 		temp.rotations = rotations;
-		temp.squares = squares;
+		temp.batch.squares = batch.squares;
 		temp.center = center;
 		return &temp;
 	}
@@ -39,7 +39,7 @@
 	}
 	void TetrominoI::detect_center()
 	{
-		center = &squares[1].pos;
+		center = &batch.squares[1].pos;
 	}
 	void TetrominoJ::init_figure(int initI, int initJ)
 	{
@@ -57,7 +57,7 @@
 			square.pos.i = initialPosition[i].i+initI;
 			square.pos.j = initialPosition[i].j+initJ;
 			square.landed = false;
-			squares.push_back(square);
+			batch.squares.push_back(square);
 		}
 		detect_center();
 	}
@@ -66,7 +66,7 @@
 		TetrominoJ temp;
 		temp.figureType = figureType;
 		temp.rotations = rotations;
-		temp.squares = squares;
+		temp.batch.squares = batch.squares;
 		temp.center = center;
 		return &temp;
 	}
@@ -80,7 +80,7 @@
 	}
 	void TetrominoJ::detect_center()
 	{
-		center = &squares[2].pos;
+		center = &batch.squares[2].pos;
 	}
 	void TetrominoL::init_figure(int initI, int initJ)
 	{
@@ -98,7 +98,7 @@
 			square.pos.i = initialPosition[i].i+initI;
 			square.pos.j = initialPosition[i].j+initJ;
 			square.landed = false;
-			squares.push_back(square);
+			batch.squares.push_back(square);
 		}
 		detect_center();
 	}
@@ -112,7 +112,7 @@
 	}
 	void TetrominoL::detect_center()
 	{
-		center = &squares[2].pos;
+		center = &batch.squares[2].pos;
 	}
 	void TetrominoO::init_figure(int initI, int initJ)
 	{
@@ -130,7 +130,7 @@
 			square.pos.i = initialPosition[i].i+initI;
 			square.pos.j = initialPosition[i].j+initJ;
 			square.landed = false;
-			squares.push_back(square);
+			batch.squares.push_back(square);
 		}
 		detect_center();
 	}
@@ -139,7 +139,7 @@
 		TetrominoO temp;
 		temp.figureType = figureType;
 		temp.rotations = rotations;
-		temp.squares = squares;
+		temp.batch.squares = batch.squares;
 		temp.center = center;
 		return &temp;
 	}
@@ -171,7 +171,7 @@
 			square.pos.i = initialPosition[i].i+initI;
 			square.pos.j = initialPosition[i].j+initJ;
 			square.landed = false;
-			squares.push_back(square);
+			batch.squares.push_back(square);
 		}
 		detect_center();
 	}
@@ -180,7 +180,7 @@
 		TetrominoS temp;
 		temp.figureType = figureType;
 		temp.rotations = rotations;
-		temp.squares = squares;
+		temp.batch.squares = batch.squares;
 		temp.center = center;
 		return &temp;
 	}
@@ -194,7 +194,7 @@
 	}
 	void TetrominoS::detect_center()
 	{
-		center = &squares[0].pos;
+		center = &batch.squares[0].pos;
 	}
 	void TetrominoT::init_figure(int initI, int initJ)
 	{
@@ -212,7 +212,7 @@
 			square.pos.i = initialPosition[i].i+initI;
 			square.pos.j = initialPosition[i].j+initJ;
 			square.landed = false;
-			squares.push_back(square);
+			batch.squares.push_back(square);
 		}
 		detect_center();
 	}
@@ -221,7 +221,7 @@
 		TetrominoT temp;
 		temp.figureType = figureType;
 		temp.rotations = rotations;
-		temp.squares = squares;
+		temp.batch.squares = batch.squares;
 		temp.center = center;
 		return &temp;
 	}
@@ -235,7 +235,7 @@
 	}
 	void TetrominoT::detect_center()
 	{
-		center = &squares[2].pos;
+		center = &batch.squares[2].pos;
 	}
 	void TetrominoZ::init_figure(int initI, int initJ)
 	{
@@ -253,7 +253,7 @@
 			square.pos.i = initialPosition[i].i+initI;
 			square.pos.j = initialPosition[i].j+initJ;
 			square.landed = false;
-			squares.push_back(square);
+			batch.squares.push_back(square);
 		}
 		detect_center();
 	}
@@ -262,7 +262,7 @@
 		TetrominoZ temp;
 		temp.figureType = figureType;
 		temp.rotations = rotations;
-		temp.squares = squares;
+		temp.batch.squares = batch.squares;
 		temp.center = center;
 		return &temp;
 	}
@@ -276,5 +276,5 @@
 	}
 	void TetrominoZ::detect_center()
 	{
-		center = &squares[1].pos;
+		center = &batch.squares[1].pos;
 	}

@@ -1,8 +1,12 @@
 #include "TetrominoTypes.h"
+struct SquareBatch
+{
+	std::vector<GameSquare> squares;
+};
 struct TetrominoBase
 {
+	SquareBatch batch;
 	int rotations;
-	std::vector<GameSquare> squares;
 	Position* center;
 	TetrominoTypes figureType;
 	TetrominoBase();

@@ -338,20 +338,20 @@
 	void Tetris::reimagine_field()
 	{
 		for(int i=0;i<figures.size();i++)
-			for (int j=0;j<figures[i]->squares.size();j++)
+			for (int j=0;j<figures[i]->batch.squares.size();j++)
 			{
-				figures[i]->squares[j].graphics.v[0].x=figures[i]->squares[j].pos.j*GameConstants::VISUAL_SIZE-GameConstants::QUAD_RADIUS+area_align_x(); 
-				figures[i]->squares[j].graphics.v[0].y=figures[i]->squares[j].pos.i*GameConstants::VISUAL_SIZE-GameConstants::QUAD_RADIUS+area_align_y();
-				figures[i]->squares[j].graphics.v[1].x=figures[i]->squares[j].pos.j*GameConstants::VISUAL_SIZE+GameConstants::QUAD_RADIUS+area_align_x(); 
-				figures[i]->squares[j].graphics.v[1].y=figures[i]->squares[j].pos.i*GameConstants::VISUAL_SIZE-GameConstants::QUAD_RADIUS+area_align_y();
-				figures[i]->squares[j].graphics.v[2].x=figures[i]->squares[j].pos.j*GameConstants::VISUAL_SIZE+GameConstants::QUAD_RADIUS+area_align_x(); 
-				figures[i]->squares[j].graphics.v[2].y=figures[i]->squares[j].pos.i*GameConstants::VISUAL_SIZE+GameConstants::QUAD_RADIUS+area_align_y();
-				figures[i]->squares[j].graphics.v[3].x=figures[i]->squares[j].pos.j*GameConstants::VISUAL_SIZE-GameConstants::QUAD_RADIUS+area_align_x(); 
-				figures[i]->squares[j].graphics.v[3].y=figures[i]->squares[j].pos.i*GameConstants::VISUAL_SIZE+GameConstants::QUAD_RADIUS+area_align_y();
+				figures[i]->batch.squares[j].graphics.v[0].x=figures[i]->batch.squares[j].pos.j*GameConstants::VISUAL_SIZE-GameConstants::QUAD_RADIUS+area_align_x(); 
+				figures[i]->batch.squares[j].graphics.v[0].y=figures[i]->batch.squares[j].pos.i*GameConstants::VISUAL_SIZE-GameConstants::QUAD_RADIUS+area_align_y();
+				figures[i]->batch.squares[j].graphics.v[1].x=figures[i]->batch.squares[j].pos.j*GameConstants::VISUAL_SIZE+GameConstants::QUAD_RADIUS+area_align_x(); 
+				figures[i]->batch.squares[j].graphics.v[1].y=figures[i]->batch.squares[j].pos.i*GameConstants::VISUAL_SIZE-GameConstants::QUAD_RADIUS+area_align_y();
+				figures[i]->batch.squares[j].graphics.v[2].x=figures[i]->batch.squares[j].pos.j*GameConstants::VISUAL_SIZE+GameConstants::QUAD_RADIUS+area_align_x(); 
+				figures[i]->batch.squares[j].graphics.v[2].y=figures[i]->batch.squares[j].pos.i*GameConstants::VISUAL_SIZE+GameConstants::QUAD_RADIUS+area_align_y();
+				figures[i]->batch.squares[j].graphics.v[3].x=figures[i]->batch.squares[j].pos.j*GameConstants::VISUAL_SIZE-GameConstants::QUAD_RADIUS+area_align_x(); 
+				figures[i]->batch.squares[j].graphics.v[3].y=figures[i]->batch.squares[j].pos.i*GameConstants::VISUAL_SIZE+GameConstants::QUAD_RADIUS+area_align_y();
 				for (int vi = 0; vi < 4; vi++)
 				{
-					figures[i]->squares[j].graphics.v[vi].x += GameConstants::QUAD_RADIUS;
-					figures[i]->squares[j].graphics.v[vi].y += GameConstants::QUAD_RADIUS;
+					figures[i]->batch.squares[j].graphics.v[vi].x += GameConstants::QUAD_RADIUS;
+					figures[i]->batch.squares[j].graphics.v[vi].y += GameConstants::QUAD_RADIUS;
 				}
 			}	
 	}
@@ -377,8 +377,8 @@
 	void Tetris::render_inbox()
 	{
 		for(int i=0;i<figures.size();i++)
-			for (int j=0;j<figures[i]->squares.size();j++)
-				hge->Gfx_RenderQuad(&figures[i]->squares[j].graphics);
+			for (int j=0;j<figures[i]->batch.squares.size();j++)
+				hge->Gfx_RenderQuad(&figures[i]->batch.squares[j].graphics);
 	}
 	void Tetris::render_wall()
 	{
@@ -461,26 +461,27 @@
 	TetrominoBase* Tetris::get_random_tetromino(int initI, int initJ)
 	{
 		srand(time(NULL));
-		TetrominoTypes type = (TetrominoTypes)(rand() % 7 + 1);
-		switch (type)
-		{
-		case TetrominoTypes::I:
+		//TetrominoTypes type = (TetrominoTypes)(rand() % 7 + 1);
+		//switch (type)
+		//{
+		//case TetrominoTypes::I:
+		//	return new TetrominoI(initI, initJ);
+		//case TetrominoTypes::J:
+		//	return new TetrominoJ(initI, initJ);
+		//case TetrominoTypes::L:
+		//	return new TetrominoL(initI, initJ);
+		//case TetrominoTypes::O:
+		//	return new TetrominoO(initI, initJ);
+		//case TetrominoTypes::S:
+		//	return new TetrominoS(initI, initJ);
+		//case TetrominoTypes::T:
+		//	return new TetrominoT(initI, initJ);
+		//case TetrominoTypes::Z:
+		//	return new TetrominoZ(initI, initJ);
+		//default:
+		//	return new TetrominoO(initI, initJ);
+		//}
 			return new TetrominoI(initI, initJ);
-		case TetrominoTypes::J:
-			return new TetrominoJ(initI, initJ);
-		case TetrominoTypes::L:
-			return new TetrominoL(initI, initJ);
-		case TetrominoTypes::O:
-			return new TetrominoO(initI, initJ);
-		case TetrominoTypes::S:
-			return new TetrominoS(initI, initJ);
-		case TetrominoTypes::T:
-			return new TetrominoT(initI, initJ);
-		case TetrominoTypes::Z:
-			return new TetrominoZ(initI, initJ);
-		default:
-			return new TetrominoO(initI, initJ);
-		}
 	}
 	//returns curent, if figures are not empty, and last is not landed 
 	TetrominoBase* Tetris::current_tetromino()
@@ -494,13 +495,13 @@
 	{
 		TetrominoBase*figure = get_random_tetromino(initI, initJ);
 		if(figure->intersects_any(figures)) return false;
-		for(int i=0;i<figure->squares.size();i++)
-			figure->squares[i].graphics = *HGEQuadFactory::init_visual_square(hge, this->squarePath, col, this->brickTexFraction, this->brickTexStartX, this->brickTexStartY);
+		for(int i=0;i<figure->batch.squares.size();i++)
+			figure->batch.squares[i].graphics = *HGEQuadFactory::init_visual_square(hge, this->squarePath, col, this->brickTexFraction, this->brickTexStartX, this->brickTexStartY);
 		figures.push_back(figure);
-		for(int i=0;i<current_tetromino()->squares.size();i++)
+		for(int i=0;i<current_tetromino()->batch.squares.size();i++)
 		{
-			current_tetromino()->squares[i].graphics.tex=hge->Texture_Load(GameConstants::get_texture_path().c_str());
-			if(!current_tetromino()->squares[i].graphics.tex)
+			current_tetromino()->batch.squares[i].graphics.tex=hge->Texture_Load(GameConstants::get_texture_path().c_str());
+			if(!current_tetromino()->batch.squares[i].graphics.tex)
 			{
 				MessageBox(NULL, "Can't load MENU.WAV or PARTICLES.PNG", "Error", MB_OK | MB_ICONERROR | MB_APPLMODAL);
 				hge->System_Shutdown();
@@ -512,8 +513,8 @@
 	void Tetris::dispose_textures()
 	{
 		for(int i=0;i<figures.size();i++)
-			for (int j=0;j<figures[i]->squares.size();j++)
-				hge->Texture_Free(figures[i]->squares[j].graphics.tex);
+			for (int j=0;j<figures[i]->batch.squares.size();j++)
+				hge->Texture_Free(figures[i]->batch.squares[j].graphics.tex);
 	}
 	void Tetris::place_all()
 	{
@@ -610,8 +611,8 @@
 	{
 		std::string msg = "Tetris ["+StringExtensions::to_string(figures.size())+"] => ";
 		int lastIndex = figures.size() - 1;
-		for(int j=figures[lastIndex]->squares.size()-1;j>=0;j--)
-			msg+="["+StringExtensions::to_string(figures[lastIndex]->squares[j].pos.i)+";"+StringExtensions::to_string(figures[lastIndex]->squares[j].pos.j)+"|"+(figures[lastIndex]->squares[j].landed == true ? "!" : "?")+"]";
+		for(int j=figures[lastIndex]->batch.squares.size()-1;j>=0;j--)
+			msg+="["+StringExtensions::to_string(figures[lastIndex]->batch.squares[j].pos.i)+";"+StringExtensions::to_string(figures[lastIndex]->batch.squares[j].pos.j)+"|"+(figures[lastIndex]->batch.squares[j].landed == true ? "!" : "?")+"]";
 		//for(int i=figures.size()-1;i>=0;i--)
 		//	for(int j=figures[i]->squares.size()-1;j>=0;j--)
 		//		msg+="["+StringExtensions::to_string(figures[i]->squares[j].pos.i)+";"+StringExtensions::to_string(figures[i]->squares[j].pos.j)+"|"+(figures[i]->squares[j].landed == true ? "!" : "?")+"]";
@@ -687,9 +688,9 @@
 	{
 		int minDeltaI = fieldHeight;
 		for(int fi = 0; fi < figures.size(); fi++)
-			for(int fj = 0; fj < figures[fi]->squares.size();fj++)
+			for(int fj = 0; fj < figures[fi]->batch.squares.size();fj++)
 			{
-				Position placedPos = figures[fi]->squares[fj].pos;
+				Position placedPos = figures[fi]->batch.squares[fj].pos;
 				if(!current_tetromino()->takes_position(placedPos))//if figure square considered is not related to current
 					if(placedPos.j == currentPos.j)
 					{
@@ -708,9 +709,9 @@
 	{
 		TetrominoBase*current = current_tetromino();
 		int minDeltaI = INT_MAX;
-		for(int i = 0; i < current->squares.size(); i++)
+		for(int i = 0; i < current->batch.squares.size(); i++)
 		{
-			int currentDelta = projection_delta(current->squares[i].pos) - 1;
+			int currentDelta = projection_delta(current->batch.squares[i].pos) - 1;
 			if(minDeltaI > currentDelta)
 				minDeltaI = currentDelta;
 		}

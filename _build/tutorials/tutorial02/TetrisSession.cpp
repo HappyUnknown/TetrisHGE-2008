@@ -23,8 +23,8 @@
 	{
 	  std::string delimiter = StringExtensions::to_string(splitter);
 	  std::ofstream outfile(guarantee_get_session_path().c_str(), std::ios_base::app | std::ios_base::out);
-	  for (int i = 0; i < figure->squares.size(); i++)
-		outfile << figure->squares[i].pos.i << delimiter << figure->squares[i].pos.j << delimiter << (int)figure->figureType << delimiter << (int)figure->squares[i].landed << delimiter << (int)TetrominoColors::detect_color(figure->squares[i].graphics.v[0].col) << delimiter << "white_square.png" << std::endl;
+	  for (int i = 0; i < figure->batch.squares.size(); i++)
+		outfile << figure->batch.squares[i].pos.i << delimiter << figure->batch.squares[i].pos.j << delimiter << (int)figure->figureType << delimiter << (int)figure->batch.squares[i].landed << delimiter << (int)TetrominoColors::detect_color(figure->batch.squares[i].graphics.v[0].col) << delimiter << "white_square.png" << std::endl;
 	  outfile << "\n";
 	  outfile.close();
 	}
@@ -103,13 +103,13 @@
 						current = new TetrominoO(i, j);
 						break;
 					}
-					current->squares.clear();//because it already goes with defaults
+					current->batch.squares.clear();//because it already goes with defaults
 				}
 				GameSquare gs;
 				gs.pos = Position(i,j);
 				gs.landed = landed;
 				gs.graphics = *HGEQuadFactory::init_visual_square(hge, GameConstants::get_texture_path(), color);
-				current->squares.push_back(gs);
+				current->batch.squares.push_back(gs);
 			}
 			else
 			{
